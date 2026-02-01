@@ -4,10 +4,11 @@ services:
   app:
     build:
       context: .
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     environment:
       - NODE_ENV=test
+      - PORT=8080
     restart: always
     ports:
-      - "4000:4000"
-    command: [ "node", "index.js" ]
+      - "80:8080"    # Host port 80 → container port 8080
+    command: ["node", "index.js"]
