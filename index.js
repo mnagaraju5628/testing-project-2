@@ -1,20 +1,26 @@
-var express = require('express');
-var app = express();
+// index.js
+const express = require('express');
+const app = express();
 
-app.get('/', function (req, res) {
-    res.send('{ "response": "Welcome to Github-action CI/CD via ansible " }');
+// Root endpoint
+app.get('/', (req, res) => {
+    res.json({ response: "Welcome to Github-action CI/CD via ansible" });
 });
 
-app.get('/will', function (req, res) {
-    res.send('{ "response": "Welcome" }');
+// /will endpoint
+app.get('/will', (req, res) => {
+    res.json({ response: "Welcome" });
 });
 
-app.get('/ready', function (req, res) {
-    res.send('{ "response": " Great!, It works!" }');
+// /ready endpoint
+app.get('/ready', (req, res) => {
+    res.json({ response: "Great!, It works!" });
 });
 
+// Use PORT from environment or default 8080
 const PORT = process.env.PORT || 8080;
 
+// Bind to 0.0.0.0 to expose outside container
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
 });
