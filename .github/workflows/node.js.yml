@@ -44,9 +44,9 @@ jobs:
       # Build Docker Compose images
       - name: Build Docker Compose images
         working-directory: /home/mnagaraju/actions-runner-repo2/testing-project-2
-        run: docker-compose -f docker-compose-test.yml build
+        run: docker-compose -f docker-compose-test.yml up -d --build app
 
       # Start Docker Compose services
       - name: Start Docker Compose services
         working-directory: /home/mnagaraju/actions-runner-repo2/testing-project-2
-        run: docker-compose -f docker-compose-test.yml up -d
+        run: docker-compose -f docker-compose-test.yml up -d app
