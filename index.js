@@ -4,7 +4,7 @@ const app = express();
 
 // Root endpoint
 app.get('/', (req, res) => {
-    res.json({ response: "Welcome to Github-action CI/CD via ansible" });
+    res.json({ response: "deploy service with docker compose" });
 });
 
 // /will endpoint
