@@ -1,12 +1,18 @@
-FROM node:18-alpine
+# Use official Node 16 image
+FROM node:16-alpine
 
-WORKDIR /usr/app
+# Set working directory
+WORKDIR /app
 
+# Copy package files and install dependencies
 COPY package*.json ./
-RUN npm install 
+RUN npm install --production
 
+# Copy app source
 COPY . .
 
-RUN npm install pm2 -g
+# Expose port 8080 inside container
+EXPOSE 8080
 
-CMD ["pm2-runtime", "index.js"]
+# Run the app
+CMD ["node", "index.js"]
