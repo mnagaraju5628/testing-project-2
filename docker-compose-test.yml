@@ -8,7 +8,28 @@ services:
     environment:
       - NODE_ENV=test
       - PORT=8080
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - DB_NAME=testdb
     restart: always
     ports:
-      - "80:8080"    # Host port 80 → container port 8080
+      - "80:8080"
+    depends_on:
+      - mysql
     command: ["node", "index.js"]
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: testdb
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql_data:
