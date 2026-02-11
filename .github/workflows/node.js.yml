@@ -21,26 +21,7 @@ jobs:
       # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      # Use Node.js
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-
-      # Install Node dependencies
-      - name: Install Node dependencies
-        run: npm ci
-
-      # Build Node project
-      - name: Build Node project
-        run: npm run build --if-present
-
-      # Install additional dependencies (optional)
-      - name: Install additional dependencies
-        run: npm install
-
+        
       # Build Docker Compose images
       - name: Build Docker Compose images
         working-directory: /home/mnagaraju/actions-runner-repo2/testing-project-2
