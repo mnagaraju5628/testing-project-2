@@ -4,12 +4,13 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      - NODE_ENV=test
-      - PORT=8080
-      - DB_HOST=10.10.0.5   # Cloud SQL Private IP
-      - DB_USER=root
-      - DB_PASSWORD=yourpassword
-      - DB_NAME=testdb
+  - NODE_ENV=test
+  - PORT=8080
+  - DB_HOST=10.25.128.3
+  - DB_PORT=3306
+  - DB_USER=root
+  - DB_PASSWORD=yourpassword
+  - DB_NAME=testdb
     restart: always
     ports:
       - "80:8080"
