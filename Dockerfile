@@ -1,18 +1,20 @@
-# Use official Node 16 image
+# Use official lightweight Node image
 FROM node:16-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy only package files first (better layer caching)
 COPY package*.json ./
-RUN npm install --production
 
-# Copy app source
+# Install only production dependencies
+RUN npm install --omit=dev
+
+# Copy remaining application files
 COPY . .
 
-# Expose port 8080 inside container
+# Expose application port
 EXPOSE 8080
 
-# Run the app
+# Run the application
 CMD ["node", "index.js"]
