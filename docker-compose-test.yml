@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   app:
     build:
@@ -6,12 +8,29 @@ services:
     environment:
       NODE_ENV: test
       PORT: 8080
-      DB_HOST: 10.10.0.5
+      DB_HOST: mysql
       DB_PORT: 3306
       DB_USER: root
-      DB_PASSWORD: yourpassword
+      DB_PASSWORD: rootpassword
       DB_NAME: testdb
     restart: always
     ports:
       - "80:8080"
-    command: ["node", "index.js"]
+    depends_on:
+      - mysql
+    command: ["npm", "start"]
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: testdb
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql_data:
